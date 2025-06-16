@@ -43,28 +43,6 @@ Built with a robust backend using a Random Forest Classifier (optimized with Gri
 
 ---
 
-## 📁 Project Structure
-
-
-career-path-prediction/
-├── backend/
-│   ├── model.pkl                # Trained ML model
-│   ├── app.py                   # Flask API server
-│   ├── preprocess.py            # Data preprocessing logic
-│   └── requirements.txt
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── App.js
-│   └── package.json
-├── Dockerfile
-├── README.md
-└── .env
-
-
----
 
 ## 🛠 Setup Instructions
 
