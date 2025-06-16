@@ -180,5 +180,5 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 ## 📬 Contact
 
 For suggestions, queries, or collaboration:
-📧 your.email@example.com
-🔗 [LinkedIn](https://www.linkedin.com/in/yourprofile)
+📧 mithil20056mistry@gmail.com
+🔗 https://www.linkedin.com/in/mithil-mistry-394a38250/
