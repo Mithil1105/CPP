@@ -1,119 +1,184 @@
-# obesity-predictor
-This project presents a comprehensive machine learning pipeline designed for predicting obesity levels based on lifestyle, demographic, and biometric data. Built with reproducibility in mind, this pipeline leverages advanced stacking ensemble techniques to combine the power of multiple machine learning models for enhanced prediction accuracy. The approach is derived from, and extends, the methodology presented in our peer-reviewed paper:
+# 🎓 Career Path Prediction System
 
->Vakani, H., Hardik Jayswal, et al. (2025). Obesity Level Prediction Using Machine Learning Stacking Ensembles.
->The model demonstrates a remarkable accuracy of 96.7%, validated on a unique blended dataset incorporating both CDC and Colombia-Mexico-Peru data, ensuring robustness and generalizability across diverse populations. This work sets a foundation for further exploration and improvement in the field of health data science, providing a powerful tool for predictive health modeling.
+A full-stack machine learning web application that predicts students' future career paths based on academic, technical, and extracurricular profile data.
+
+---
+
+## 📌 Overview
+
+Career counseling in universities often lacks personalization and data-driven insights. This system uses a trained machine learning model to forecast potential career outcomes for students—helping both students and academic advisors make informed decisions.
+
+Built with a robust backend using a Random Forest Classifier (optimized with GridSearchCV and SMOTE for class balancing) and a responsive React.js frontend, this project is production-ready and easily deployable.
+
+---
+
+## 🚀 Features
+
+### ✅ Machine Learning Backend
+- Trained on structured data with features like GPA, certifications, internships, and projects.
+- Random Forest Classifier with hyperparameter tuning via GridSearchCV.
+- SMOTE to resolve class imbalance.
+- Outputs predicted career path with 90% accuracy.
+
+### 🎨 Frontend Interface
+- Built using *React.js* with responsive UI.
+- Clean input form for entering student details.
+- Displays predicted career path and relevant confidence metrics.
+
+### ⚙ System Design
+- REST API using Flask (or Django optionally).
+- Dockerized for deployment on Heroku, Render, or any cloud provider.
+- Easily extendable to support new input features.
+
+---
+
+## 🧰 Tech Stack
+
+| Layer       | Technologies                            |
+|-------------|------------------------------------------|
+| Frontend    | React.js, Tailwind CSS / Bootstrap       |
+| Backend     | Python, Flask (REST API)                 |
+| ML Model    | Scikit-learn, Pandas, SMOTE (Imbalanced-learn) |
+| Deployment  | Docker, Heroku/Render/AWS                |
+
+---
+
+## 📁 Project Structure
+
+
+career-path-prediction/
+├── backend/
+│   ├── model.pkl                # Trained ML model
+│   ├── app.py                   # Flask API server
+│   ├── preprocess.py            # Data preprocessing logic
+│   └── requirements.txt
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── App.js
+│   └── package.json
+├── Dockerfile
+├── README.md
+└── .env
 
 
 ---
 
-## ✨ Key features
-| Module | What it does |
-|--------|--------------|
-| **/notebooks** | End-to-end Jupyter workflow: EDA → preprocessing → model training & evaluation |
-| **/src/data** | Cleaners, transformers, one-hot encoders, SMOTE balancing |
-| **/src/models** | • Stacking ensemble (RF + GBM + SVM + LogReg) <br>• RNN baseline for sequential data <br>• Optuna hyper-parameter search |
-| **predict.py** | CLI entry point – load a CSV or single JSON row and return predicted obesity class |
-| **/reports** | Automatically generated confusion matrices, ROC curves, and SHAP plots |
+## 🛠 Setup Instructions
 
----
+### Clone the Repository
 
-## 🗂️ Project structure
-obesity-predictor/
-├── data/ # raw & interim datasets (git-ignored)
-├── notebooks/ # Jupyter notebooks (EDA, training, …)
-├── src/
-│ ├── data/ # data loading / cleaning / feature builders
-│ ├── models/ # model classes, training, evaluation
-│ └── utils/ # common helpers
-├── models/ # saved .pkl / .h5 weights (git-ignored; use DVC or Git-LFS)
-├── requirements.txt
-└── predict.py
-
-yaml
-Copy
-Edit
-
----
-
-## 📦 Installation
-```bash
-# 1) clone the repo
-git clone https://github.com/hasti0044/obesity-predictor.git
-cd obesity-predictor
-
-# 2) create a virtual environment (recommended)
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-
-# 3) install dependencies
-pip install -r requirements.txt
-🚀 Quick start
 bash
-Copy
-Edit
-# train the stacking model with default settings
-python -m src.models.train --config configs/stack_default.yml
-
-# run inference on new data
-python predict.py --input samples/demo_row.json
-For a step-by-step walkthrough, open notebooks/01_full_pipeline.ipynb and run each cell.
-```
-
-📊 Results
-| Model               | Accuracy | Macro-F1 | Notes                                        |
-|---------------------|----------|----------|----------------------------------------------|
-| **Stacking Ensemble** | 0.967    | 0.964    | 10-fold CV, class-weighted, Optuna-tuned     |
-| **Random Forest**    | 0.943    | 0.939    | 300 trees                                   |
-| **Gradient Boosting**| 0.951    | 0.948    | learning_rate = 0.05                        |
-| **SVM (RBF)**        | 0.904    | 0.900    | y = 0.01, C = 10                            |
-| **RNN (LSTM)**       | 0.912    | 0.907    | 3 × 64-unit layers                          |
+git clone https://github.com/yourusername/career-path-prediction.git
+cd career-path-prediction
 
 
-Detailed metrics, ROC curves, and SHAP importance plots are in reports/.
+### Backend Setup
 
-📚 Dataset
-Primary: CDC Adult & Youth Health Surveys (840 rows × 16 cols)
+bash
+cd backend
+python -m venv venv
+source venv/bin/activate   # Use 'venv\Scripts\activate' on Windows
+pip install -r requirements.txt
+python app.py
 
-Synthetic augmentation: 5 000 rows generated with CTGAN to reduce class imbalance
 
-License: Public Domain / CC-0
-See data/README.md for acquisition scripts and preprocessing steps.
+### Frontend Setup
 
-⚙️ Configuration
-All hyper-parameters are YAML-driven.
-Edit any file in configs/ or override on the CLI, e.g.:
+bash
+cd frontend
+npm install
+npm run dev
 
-📝 Citation
 
-Once the paper is published, we will update the citation here. Thank you for your understanding!
+### Access the App
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:5000/predict
 
-If you use this code or dataset, please cite:
+---
 
-```bibtex
-@inproceedings{Vakani2025Obesity,
-  title   = {Obesity Level Prediction Using Machine Learning Stacking Ensembles},
-  author  = {Hasti Vakani, Mithil Mistry, Hardik Jayswal, et al.},
-  booktitle = {Proceedings of the 10th International Conference on Information Technology and Computer Science (ICTCS 2025)},
-  year    = {2025},
-  pages   = {Will be updated after publication},  # Add the specific page range once available
-  publisher = {10th International Conference on Information Technology and Computer Science (ICTCS 2025)},  # Replace with actual publisher name
+## 📊 Input Fields
 
+| Field                    | Example                         |
+|--------------------------|----------------------------------|
+| Gender                   | Female                          |
+| Age                      | 21                              |
+| GPA                      | 8.7                             |
+| Certifications           | Google Data Analytics, AWS CP   |
+| Internships              | Yes                             |
+| Hackathons Attended      | 3                               |
+| Leadership Role          | Technical Club Secretary        |
+| Programming Languages    | Python, Java, SQL               |
+
+---
+
+## 📡 API Endpoint
+
+### POST /predict
+
+*Request Body*:
+
+json
+{
+  "Gender": "Male",
+  "Age": 22,
+  "GPA": 9.1,
+  "Certifications": "AWS, IBM ML",
+  "Internship Experience": "Yes",
+  "Hackathons Attended": 4,
+  "Leadership Role": "Class Representative"
 }
-```
-🤝 Contributing
-Pull requests are welcome!
 
-Fork the repo & create a feature branch
 
-black / ruff lint before committing
+*Response*:
 
-Open a PR and fill out the template
+json
+{
+  "predicted_career": "Data Scientist",
+  "confidence": 0.91
+}
 
-📄 License
-This project is licensed under the MIT License – see LICENSE for details.
 
-🙋‍♀️ Contact
-Hasti Vakani – hasti.vakani9104@gmail.com
+---
 
-Enjoy exploring, reproducing, or extending the obesity-predictor! 🎉
+## 📈 Model Performance
+
+| Metric     | Score   |
+|------------|---------|
+| Accuracy   | 90%     |
+| Precision  | 0.89    |
+| Recall     | 0.91    |
+| F1-Score   | 0.90    |
+
+---
+
+## 🧩 Future Improvements
+
+- Extend to other disciplines beyond computer science.
+- Add SHAP/LIME for model interpretability.
+- Integrate resume/GitHub parser for richer input.
+- Admin dashboard for monitoring predictions and usage.
+
+---
+
+## 👨‍💻 Authors
+
+- *[Your Name]* – Machine Learning, Backend
+- *[Collaborator Name]* – Frontend & UI/UX
+- *[Mentor/Professor]* – Research & Guidance
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+---
+
+## 📬 Contact
+
+For suggestions, queries, or collaboration:
+📧 your.email@example.com
+🔗 [LinkedIn](https://www.linkedin.com/in/yourprofile)
